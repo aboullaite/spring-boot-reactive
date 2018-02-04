@@ -36,21 +36,21 @@ public class DataLoader implements CommandLineRunner {
         CSVParser parser = new CSVParser(br, CSVFormat.EXCEL.withHeader().withTrim());
 
         Iterable<CSVRecord> records = parser.getRecords();
-        records.forEach(r ->
-        aircrafts.add(
-                new Aircraft(r.get("icao24"),
-                r.get("registration"),
-                r.get("manufacturericao"),
-                r.get("manufacturername"),
-                r.get("model"),
-                r.get("owner"),
-                r.get("operator"),
-                r.get("reguntil"),
-                r.get("engines"),
-                r.get("built")
-                ))
-                );
-        repository.saveAll(aircrafts).subscribe();
-        LOGGER.info("Done loading data ...!");
+        records.forEach(r -> {
+            if (!r.get("icao24").isEmpty())
+                aircrafts.add(
+                        new Aircraft(r.get("icao24"),
+                                r.get("registration"),
+                                r.get("manufacturericao"),
+                                r.get("manufacturername"),
+                                r.get("model"),
+                                r.get("owner"),
+                                r.get("operator"),
+                                r.get("reguntil"),
+                                r.get("engines"),
+                                r.get("built")
+                        ));
+        });
+        repository.saveAll(aircrafts).subscribe(v -> LOGGER.info("saving {}", v), e -> LOGGER.error("Saving Failed", e), () -> LOGGER.info("Loading Data Complete!"));
     }
 }

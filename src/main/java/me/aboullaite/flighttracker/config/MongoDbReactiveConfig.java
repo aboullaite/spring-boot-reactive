@@ -15,6 +15,6 @@ public class MongoDbReactiveConfig extends AbstractReactiveMongoConfiguration {
 
     @Override
     protected String getDatabaseName() {
-        return "test";
+        return "aircraft-db";
     }
 }
