@@ -102,7 +102,7 @@ function plane_info(state) {
     '<p>Squawk: ' + handleempty(state[14]) + '</p>' +
     '<p>Landed: ' + state[8] + '</p>' +
     '<p>Barom Altitude: ' + handleempty(state[13]) + 'm</p>' +
-    '<p>heading: ' + state[8] + '</p>' +
+    '<p>heading: ' + state[10] + '</p>' +
         '<div class="card-action"> ' +
         '<a href="https://opensky-network.org/network/explorer?icao24='+state[0]+'">More info about this flight</a> ' +
         '</div>';

@@ -12,6 +12,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
+import reactor.core.publisher.Flux;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -51,6 +52,7 @@ public class DataLoader implements CommandLineRunner {
                                 r.get("built")
                         ));
         });
+
         repository.saveAll(aircrafts).subscribe(v -> LOGGER.info("saving {}", v), e -> LOGGER.error("Saving Failed", e), () -> LOGGER.info("Loading Data Complete!"));
     }
 }
